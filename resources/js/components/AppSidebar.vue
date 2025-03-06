@@ -15,13 +15,11 @@ const page = usePage();
 const isAuthenticated = computed(() => (page.props.auth as any)?.user);
 
 const mainNavItems = computed(() => [
-    // Public items
     {
         title: 'Snippets',
         href: '/snippets',
         icon: Code,
     },
-    // Auth-only items
     ...(isAuthenticated.value ? [
         {
             title: 'Dashboard',
@@ -56,7 +54,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard')">
+                        <Link :href="route('snippets')">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>

@@ -59,7 +59,10 @@ const breadcrumbs: BreadcrumbItem[] = [
                     </Card>
                 </Link>
             </div>
-            <div v-else class="py-8 text-center">No snippets found</div>
+            <div v-else class="py-8 text-center">
+                No snippets found
+                <Link :href="route('snippets.create')" class="underline">Create one</Link>
+            </div>
         </div>
     </AppLayout>
 </template>

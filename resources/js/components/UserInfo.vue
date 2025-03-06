@@ -2,10 +2,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useInitials } from '@/composables/useInitials';
 import type { User } from '@/types';
-// import { computed } from 'vue';
 
 interface Props {
-    user: User;
+    user: User | null;
     showEmail?: boolean;
 }
 
@@ -15,14 +14,13 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { getInitials } = useInitials();
 
-// Compute whether we should show the avatar image
 </script>
 
 <template>
     <Avatar class="rounded-lg w-8 h-8 overflow-hidden">
         <AvatarImage v-if="false" :src="user.avatar as string" :alt="user.name" />
         <AvatarFallback class="rounded-lg text-black dark:text-white">
-            {{ $props.user !== null ?  getInitials(user.name) : "G" }}
+            {{ props.user !== null ?  getInitials(user.name) : "G" }}
         </AvatarFallback>
     </Avatar>
 

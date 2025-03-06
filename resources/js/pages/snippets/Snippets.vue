@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem, type Snippet } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Heart } from 'lucide-vue-next';
 
 defineProps<{
@@ -35,13 +35,18 @@ const breadcrumbs: BreadcrumbItem[] = [
                 >
                     <Card class="h-full">
                         <CardHeader>
-                            <CardTitle>{{ snippet.title }}</CardTitle>
+                            <CardTitle>
+                                <div class="flex justify-between">
+                                    {{ snippet.title }}
+                                    <i :class="`devicon-${snippet.language}-plain colored`" class="text-3xl"></i>
+                                </div>
+                            </CardTitle>
                             <CardDescription class="line-clamp-2">{{ snippet.description }}</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div class="flex justify-between text-muted-foreground text-sm">
+                            <div class="flex justify-between items-center text-muted-foreground text-sm">
                                 <Badge>{{ snippet.language }}</Badge>
-                                <span>{{ snippet.user.name }}</span>
+                                <span>Creator: {{ snippet.user.name }}</span>
                             </div>
                             <div class="flex justify-between mt-2 text-muted-foreground text-xs">
                                 <span class="mr-3">Views: {{ snippet.views_count }}</span>

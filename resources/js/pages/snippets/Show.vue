@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem, type Snippet } from '@/types';
-import { Head, useForm } from '@inertiajs/vue3';
-import { Heart, Copy, Share2, Check } from 'lucide-vue-next';
+import { Head, useForm, Link, usePage } from '@inertiajs/vue3';
+import { Heart, Copy, Share2, Check, Pencil } from 'lucide-vue-next';
 import  useMarkdown  from '@/composables/useMarkdown';
 import { computed, ref } from 'vue';
 import '@catppuccin/highlightjs/css/catppuccin-macchiato.css'
@@ -60,6 +60,9 @@ const shareSnippet = () => {
         showShareTick.value = false;
     }, 2000);
 };
+
+const page = usePage();
+
 </script>
 
 <template>
@@ -73,9 +76,21 @@ const shareSnippet = () => {
                         <div class="space-y-2">
                             <CardTitle>{{ snippet.title }}</CardTitle>
                         </div>
-                        <Button variant="ghost" size="icon" class="ml-4" @click="toggleFavorite" :disabled="form.processing">
-                            <Heart class="w-24 h-24" :class="{ 'fill-current': snippet.is_favorite }" />
-                        </Button>
+                        <div class="flex gap-2">
+                            <Button variant="ghost" size="icon" class="ml-4" @click="toggleFavorite" :disabled="form.processing">
+                                <Heart :style="{height:'25px', width: '25px' }" :class="{ 'fill-current': snippet.is_favorite }" />
+                            </Button>
+                            <Link
+                                v-if="snippet.user.id === (page.props as any).auth.user?.id"
+                                :href="route('snippets.edit', { id : snippet.id })"
+                                class="inline-flex items-center gap-2"
+                            >
+                                <Button variant="outline" size="sm">
+                                    <Pencil class="mr-2 w-4 h-4" />
+                                    Edit
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </CardHeader>
 

@@ -21,7 +21,7 @@ defineProps<{
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </template>
         </div>
-        <div class="space-x-5" v-if="!page.props.auth.user">
+        <div class="space-x-2" v-if="!page.props.auth.user">
             <Link
                 :href="route('login')"
                 class="inline-block px-5 py-1.5 border hover:border-[#19140035] dark:hover:border-[#3E3E3A] border-transparent rounded-sm text-[#1b1b18] dark:text-[#EDEDEC] text-sm leading-normal"

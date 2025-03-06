@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/vue3';
 import { LogOut, Settings, LogIn } from 'lucide-vue-next';
 
 interface Props {
-    user: User;
+    user: User | null;
 }
 
 defineProps<Props>();

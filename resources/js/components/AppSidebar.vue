@@ -5,14 +5,14 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { Folder, LayoutGrid, Code, PlusCircle } from 'lucide-vue-next';
+import { Folder, LayoutGrid, Code, PlusCircle, User } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 
 const page = usePage();
-const isAuthenticated = computed(() => page.props.auth?.user);
+const isAuthenticated = computed(() => (page.props.auth as any)?.user);
 
 const mainNavItems = computed(() => [
     // Public items
@@ -32,6 +32,11 @@ const mainNavItems = computed(() => [
             title: 'Create Snippet',
             href: '/snippets/create',
             icon: PlusCircle,
+        },
+        {
+            title: 'My Snippets',
+            href: '/my-snippets',
+            icon: User,
         },
     ] : []),
 ]);
@@ -60,7 +65,7 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain :items="mainNavItems as NavItem[]" />
         </SidebarContent>
 
         <SidebarFooter>

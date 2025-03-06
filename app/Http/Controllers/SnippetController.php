@@ -119,8 +119,7 @@ class SnippetController extends Controller
         $this->authorize('delete', $snippet);
 
         $snippet->delete();
-
-        return redirect()->route('snippets');
+        
     }
 
     public function toggleFavorite(Snippet $snippet)
@@ -132,5 +131,21 @@ class SnippetController extends Controller
         $snippet->save();
 
         return back();
+    }
+
+    public function mySnippets()
+    {
+        $snippets = auth()->user()->snippets()
+        ->orderBy('id')
+        ->paginate(15);
+
+        $snippets->transform(function ($snippet) {
+            $snippet->is_favorite = $snippet->favoritedBy()->where('user_id', auth()->id())->exists();
+            return $snippet;
+        });
+
+        return Inertia::render('snippets/MySnippets', [
+            'snippets' => $snippets
+        ]);
     }
 }

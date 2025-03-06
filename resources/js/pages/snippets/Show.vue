@@ -9,6 +9,7 @@ import  useMarkdown  from '@/composables/useMarkdown';
 import { computed, ref } from 'vue';
 import '@catppuccin/highlightjs/css/catppuccin-macchiato.css'
 import { toast } from 'vue-sonner';
+import { capitalize } from '@/lib/utils';
 
 const props = defineProps<{
     snippet: Snippet;
@@ -97,7 +98,7 @@ const page = usePage();
                 <CardContent>
                     <div class="border rounded-lg overflow-hidden markdown-content">
                         <div class="flex justify-between items-center px-4 py-2 border-b border-border">
-                            <span class="font-medium">{{ snippet.language?.toUpperCase() }}</span>
+                            <span class="font-medium">{{ capitalize(snippet.language || '') }}</span>
                             <div class="flex gap-2">
                                 <Button variant="ghost" size="icon" @click="copyCode">
                                     <transition name="fade" mode="out-in">

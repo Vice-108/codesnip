@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('snippets/{snippet}', [SnippetController::class, 'update'])->name('snippets.update');
     Route::delete('snippets/{snippet}', [SnippetController::class, 'destroy'])->name('snippets.destroy');
     Route::post('snippets/{snippet}/favorite', [SnippetController::class, 'toggleFavorite'])->name('snippets.favorite');
+    Route::get('/my-snippets', [SnippetController::class, 'mySnippets'])->name('snippets.my');
 });
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

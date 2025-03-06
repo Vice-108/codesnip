@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
-import SnippetTable from './SnippetTable.vue';
+import SnippetTable from '@/components/snippets/SnippetTable.vue';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Snippet } from '@/types';
 

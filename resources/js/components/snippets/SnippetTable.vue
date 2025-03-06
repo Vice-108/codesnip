@@ -38,6 +38,9 @@ defineProps<Props>();
                     </div>
                 </TableCell>
             </TableRow>
+            <TableRow v-if="snippets.length === 0">
+                <TableCell colspan="5" class="text-center">No snippets found</TableCell>
+            </TableRow>
         </TableBody>
     </Table>
 </template>

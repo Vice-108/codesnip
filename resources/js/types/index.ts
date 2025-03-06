@@ -33,4 +33,23 @@ export interface User {
     updated_at: string;
 }
 
+export interface Snippet {
+    id: number;
+    title: string;
+    description: string | null;
+    code: string;
+    language: string | null;
+    is_public: boolean;
+    user: {
+        id: number;
+        name: string;
+        email: string;
+    };
+    views_count: number;
+    is_favorite: boolean;
+    favorites_count: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;

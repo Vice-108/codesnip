@@ -10,8 +10,10 @@ html {
 
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
+        --code-bg: #24273a;
+        --code-token: #e0dfdf;
+        --background: 220 23.076923191547394% 92.90196108818054%;
+        --foreground: 234 16.022099554538727% 35.49019694328308%;
         --card: 0 0% 100%;
         --card-foreground: 0 0% 3.9%;
         --popover: 0 0% 100%;
@@ -26,8 +28,8 @@ html {
         --accent-foreground: 0 0% 9%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 92.8%;
-        --input: 0 0% 89.8%;
+        --border: 0 0% 22.8%;
+        --input: 0 0% 50%;
         --ring: 0 0% 3.9%;
         --chart-1: 12 76% 61%;
         --chart-2: 173 58% 39%;
@@ -41,11 +43,13 @@ html {
         --sidebar-primary-foreground: 0 0% 98%;
         --sidebar-accent: 0 0% 94%;
         --sidebar-accent-foreground: 0 0% 30%;
-        --sidebar-border: 0 0% 91%;
+        --sidebar-border: 0 0% 10%;
         --sidebar-ring: 217.2 91.2% 59.8%;
     }
 
     .dark {
+        --code-bg: #141621;
+        --code-token: #303043;
         --background: 0 0% 3.9%;
         --foreground: 0 0% 98%;
         --card: 0 0% 3.9%;
@@ -62,8 +66,8 @@ html {
         --accent-foreground: 0 0% 98%;
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
+        --border: 0 0% 24.9%;
+        --input: 0 0% 50%;
         --ring: 0 0% 83.1%;
         --chart-1: 220 70% 50%;
         --chart-2: 160 60% 45%;
@@ -76,7 +80,7 @@ html {
         --sidebar-primary-foreground: 0 0% 100%;
         --sidebar-accent: 0 0% 15.9%;
         --sidebar-accent-foreground: 240 4.8% 95.9%;
-        --sidebar-border: 0 0% 15.9%;
+        --sidebar-border: 0 0% 55.9%;
         --sidebar-ring: 217.2 91.2% 59.8%;
     }
 }
@@ -89,4 +93,25 @@ html {
     body {
         @apply bg-background text-foreground;
     }
+}
+.markdown-content pre {
+    background-color: var(--code-bg);
+    padding: 0.5rem !important;
+    overflow-x: auto !important;
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+}
+
+.markdown-content code {
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem !important;
+    font-size: 0.85rem !important;
+    font-family: 'Fira Code', monospace !important;
+}
+.markdown-content pre code.hljs {
+    background-color: var(--code-bg);
+    padding: 1rem !important;
+    display: block !important;
+    font-size: 0.875rem !important;
+    overflow-x: auto !important;
 }

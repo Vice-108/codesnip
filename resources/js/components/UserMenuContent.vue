@@ -33,8 +33,8 @@ defineProps<Props>();
         <DropdownMenuItem :as-child="true">
             <Link
                 class="block w-full"
-                method="post"
                 :href="user? route('logout') : route('login')"
+                method="post"
                 as="button"
             >
                 <LogOut class="mr-2 w-4 h-4" v-if="user" />

@@ -11,7 +11,7 @@ const page = usePage<SharedData>();
 </script>
 
 <template>
-    <SidebarGroup class="px-2 py-0">
+    <SidebarGroup class="px-2 py-5">
         <SidebarGroupLabel>Navigation</SidebarGroupLabel>
         <SidebarMenu>
             <SidebarMenuItem v-for="item in items" :key="item.title">

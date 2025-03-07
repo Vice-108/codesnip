@@ -47,7 +47,7 @@ const submit = () => {
 
 <template>
     <form @submit.prevent="submit" class="space-y-6">
-        <div class="gap-5 grid grid-cols-2">
+        <div class="gap-4 grid grid-cols-2">
             <FormTitle v-model="form.title" :error="form.errors.title" />
             <FormLanguage
                 v-model="selectedLanguage"

@@ -14,8 +14,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="mx-auto p-4 container">
-            <Card class="mx-auto max-w-3xl">
+        <div class="mx-auto sm:p-4 container">
+            <Card class="mx-auto border max-w-3xl" style="height: 90svh;">
                 <CardHeader>
                     <CardTitle>Create New Snippet</CardTitle>
                 </CardHeader>

@@ -1,41 +1,3 @@
-<!--
- <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
-import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/vue3';
-import PlaceholderPattern from '../components/PlaceholderPattern.vue';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
-];
-</script>
-
-<template>
-    <Head title="Dashboard" />
-
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-col flex-1 gap-4 p-4 rounded-xl h-full">
-            <div class="gap-4 grid md:grid-cols-3 auto-rows-min">
-                <div class="relative border border-sidebar-border/70 dark:border-sidebar-border rounded-xl aspect-video overflow-hidden">
-                    <PlaceholderPattern />
-                </div>
-                <div class="relative border border-sidebar-border/70 dark:border-sidebar-border rounded-xl aspect-video overflow-hidden">
-                    <PlaceholderPattern />
-                </div>
-                <div class="relative border border-sidebar-border/70 dark:border-sidebar-border rounded-xl aspect-video overflow-hidden">
-                    <PlaceholderPattern />
-                </div>
-            </div>
-            <div class="relative flex-1 border border-sidebar-border/70 dark:border-sidebar-border rounded-xl min-h-[100vh] md:min-h-min">
-                <PlaceholderPattern />
-            </div>
-        </div>
-    </AppLayout>
-</template>
- -->
 <script setup lang="ts">
 import EngagementChart from '@/components/snippets/EngagementChart.vue';
 import PopularSnippets from '@/components/snippets/PopularSnippets.vue';
@@ -46,33 +8,38 @@ import { Head, usePage } from '@inertiajs/vue3';
 import { Code, Eye, Heart } from 'lucide-vue-next';
 import { computed } from 'vue';
 
+// Get page props to debug what we're receiving
 const page = usePage();
 
-// Define dashboard data interface
 interface DashboardData {
-    totalSnippets: number;
-    totalViews: number;
-    totalFavorites: number;
-    monthlyViews: Record<string, number>;
-    popularSnippets: Array<{
-        id: number;
-        title: string;
-        views: number;
-        language: string;
-    }>;
+  totalSnippets: number;
+  totalViews: number;
+  totalFavorites: number;
+  monthlyViews: Record<string, number>;
+  popularSnippets: Array<{
+    id: number;
+    title: string;
+    views: number;
+    language: string;
+  }>;
 }
 
-// const dashboardData = computed<DashboardData>(() => page.props.dashboardData || {});
+// Define default empty data that matches the interface
+const emptyDashboardData: DashboardData = {
+  totalSnippets: 0,
+  totalViews: 0,
+  totalFavorites: 0,
+  monthlyViews: {},
+  popularSnippets: [],
+};
+
+console.log('Dashboard data:', page.props.dashboardData);
+
+// Access the dashboardData directly from page props with proper typing
 const dashboardData = computed<DashboardData>(() => {
-    const data = page.props.dashboardData as DashboardData | undefined;
-    return data || {
-        totalSnippets: 0,
-        totalViews: 0,
-        totalFavorites: 0,
-        monthlyViews: {},
-        popularSnippets: [],
-    };
+  return (page.props.dashboardData as DashboardData || emptyDashboardData);
 });
+
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

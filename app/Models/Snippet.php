@@ -18,10 +18,14 @@ class Snippet extends Model
         'language',
         'is_public',
         'user_id',
+        'views_count',    // Add this
+        'favorites_count', // Add this
     ];
 
     protected $casts = [
         'is_public' => 'boolean',
+        'views_count' => 'integer',     // Add this
+        'favorites_count' => 'integer'  // Add this
     ];
 
     public function user(): BelongsTo

@@ -5,7 +5,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem, type Snippet } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import { Heart } from 'lucide-vue-next';
-
+import { capitalize } from '@/lib/utils'
 defineProps<{
     snippets: {
         data: Array<Snippet>;
@@ -25,32 +25,32 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head title="Snippets" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="p-4 container">
-            <div v-if="snippets.data.length > 0" class="gap-4 grid md:grid-cols-3">
+        <div class="p-4">
+            <div v-if="snippets.data.length > 0" class="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                 <Link
                     v-for="snippet in snippets.data"
                     :key="snippet.id"
                     :href="route('snippets.show', { id: snippet.id })"
                     class="transition-transform hover:-translate-y-1"
                 >
-                    <Card class="h-full">
+                    <Card class="w-full">
                         <CardHeader>
                             <CardTitle>
-                                <div class="flex justify-between">
-                                    {{ snippet.title }}
-                                    <i :class="`devicon-${snippet.language}-plain colored`" class="text-3xl"></i>
+                                <div class="flex justify-between items-center leading-8">
+                                    <span class="mr-2 truncate">{{ snippet.title }}</span>
+                                    <i :class="`devicon-${snippet.language}-plain`" class="flex-shrink-0 text-3xl"></i>
                                 </div>
                             </CardTitle>
-                            <CardDescription class="line-clamp-2">{{ snippet.description }}</CardDescription>
+                            <CardDescription class="h-10 line-clamp-2">{{ snippet.description || 'No description provided' }}</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <div class="flex justify-between items-center text-muted-foreground text-sm">
-                                <Badge>{{ snippet.language }}</Badge>
-                                <span>Creator: {{ snippet.user.name }}</span>
+                                <Badge>{{ capitalize(snippet.language as string) }}</Badge>
+                                <span class="ml-2 truncate">Creator: {{ snippet.user.name }}</span>
                             </div>
                             <div class="flex justify-between mt-2 text-muted-foreground text-xs">
                                 <span class="mr-3">Views: {{ snippet.views_count }}</span>
-                                <span class="flex gap-2">
+                                <span class="flex items-center gap-2">
                                     <Heart :size="15" :class="{ 'fill-current': snippet.is_favorite }" />
                                     <span>Likes: {{ snippet.favorites_count }}</span>
                                 </span>

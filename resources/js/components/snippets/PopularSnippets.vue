@@ -25,7 +25,7 @@ defineProps<{
                 <div v-for="snippet in snippets" :key="snippet.id" class="flex justify-between items-center gap-5 px-4 rounded-md">
                     <div class="flex items-center gap-5">
                         <div class="rounded-full">
-                            <i :class="`devicon-${snippet.language}-plain colored`" class="text-2xl"></i>
+                            <i :class="`devicon-${snippet.language}-plain`" class="text-2xl"></i>
                         </div>
                         <div class="space-y-1">
                             <p class="font-medium text-sm leading-none">{{ snippet.title }}</p>

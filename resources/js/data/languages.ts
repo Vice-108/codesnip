@@ -9,7 +9,7 @@ export const languages: Language[] = [
     { value: 'python', label: 'Python' },
     { value: 'php', label: 'PHP' },
     { value: 'java', label: 'Java' },
-    { value: 'cpp', label: 'C++' },
+    { value: 'cplusplus', label: 'C++' },
     { value: 'ruby', label: 'Ruby' },
     { value: 'go', label: 'Go' },
     { value: 'rust', label: 'Rust' },

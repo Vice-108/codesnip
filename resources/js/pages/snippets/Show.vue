@@ -70,15 +70,15 @@ const page = usePage();
     <Head :title="snippet.title" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="mx-auto p-4 container">
-            <Card class="mx-auto max-w-4xl">
+        <div class="mx-auto sm:p-4 w-full lg:container">
+            <Card class="sm:mx-0 lg:mx-auto sm:border border-0 rounded-none sm:rounded-lg w-full lg:max-w-4xl">
                 <CardHeader>
-                    <div class="flex justify-between items-start">
+                    <div class="flex sm:flex-row flex-col sm:justify-between sm:items-start gap-4">
                         <div class="space-y-2">
-                            <CardTitle>{{ snippet.title }}</CardTitle>
+                            <CardTitle class="break-words">{{ snippet.title }}</CardTitle>
                         </div>
-                        <div class="flex gap-2">
-                            <Button variant="ghost" size="icon" class="ml-4" @click="toggleFavorite" :disabled="form.processing">
+                        <div class="flex justify-between sm:self-auto gap-2">
+                            <Button variant="ghost" size="icon" @click="toggleFavorite" :disabled="form.processing">
                                 <Heart :style="{height:'25px', width: '25px' }" :class="{ 'fill-current': snippet.is_favorite }" />
                             </Button>
                             <Link
@@ -95,10 +95,10 @@ const page = usePage();
                     </div>
                 </CardHeader>
 
-                <CardContent>
-                    <div class="border rounded-lg overflow-hidden markdown-content">
-                        <div class="flex justify-between items-center px-4 py-2 border-b border-border">
-                            <span class="font-medium">{{ capitalize(snippet.language || '') }}</span>
+                <CardContent class="mx-auto sm:px-6 w-full">
+                    <div class="mx-auto border rounded-lg w-full overflow-hidden markdown-content">
+                        <div class="flex flex-wrap justify-between items-center px-2 sm:px-4 py-2 border-b border-border">
+                            <span class="font-medium text-sm sm:text-base">{{ capitalize(snippet.language || '') }}</span>
                             <div class="flex gap-2">
                                 <Button variant="ghost" size="icon" @click="copyCode">
                                     <transition name="fade" mode="out-in">
@@ -114,27 +114,63 @@ const page = usePage();
                                 </Button>
                             </div>
                         </div>
-                        <div
-                            class="overflow-hidden break-words"
-                            style="overflow-wrap: break-word; word-break: break-word"
-                            v-html="formattedCode"
-                        ></div>
+                        <div class="code-container">
+                            <div
+                                class="overflow-x-scroll"
+                                v-html="formattedCode"
+                            ></div>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <CardDescription>{{ snippet.description }}</CardDescription>
                     </div>
                 </CardContent>
 
-                <CardFooter class="flex justify-between items-center">
-                    <div class="space-x-4">
+                <CardFooter class="flex sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="space-x-2">
                         <span>Created by</span>
                         <span class="font-semibold">{{ snippet.user.name }}</span>
                     </div>
                     <div class="text-muted-foreground text-sm">
-                        <span class="p-3 border rounded-lg">Views: {{ snippet.views_count }}</span>
+                        <span class="p-2 sm:p-3 border rounded-lg">Views: {{ snippet.views_count }}</span>
                     </div>
                 </CardFooter>
             </Card>
         </div>
     </AppLayout>
 </template>
+<style scoped>
+.code-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.code-container :deep(pre) {
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.code-container :deep(code) {
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+@media (max-width: 640px) {
+    .code-container :deep(pre),
+    .code-container :deep(code) {
+        font-size: 0.6rem;
+    }
+}
+/* Tablet styles */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .code-container :deep(pre),
+    .code-container :deep(code) {
+        font-size: 0.75rem;
+    }
+    .code-container {
+        max-width: 90vw;
+    }
+}
+</style>

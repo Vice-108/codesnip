@@ -34,7 +34,7 @@ defineProps<Props>();
             <Link
                 class="block w-full"
                 :href="user? route('logout') : route('login')"
-                method="post"
+                :method="user ? 'post' : undefined"
                 as="button"
             >
                 <LogOut class="mr-2 w-4 h-4" v-if="user" />

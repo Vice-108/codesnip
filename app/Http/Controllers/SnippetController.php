@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Snippet;
+use App\Models\SnippetView;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -59,14 +60,36 @@ class SnippetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Snippet $snippet)
+    public function show(Snippet $snippet, Request $request)
     {
         if (!$snippet->is_public && $snippet->user_id !== auth()->id()) {
             abort(403);
         }
 
         $snippet->load('user');
-        $snippet->increment('views_count');
+
+        // Get visitor IP address
+        $visitorIp = $request->ip();
+
+        // Check if this is a new view (not from the same IP in the last hour)
+        $recentView = SnippetView::where('snippet_id', $snippet->id)
+            ->where('viewer_ip', $visitorIp)
+            ->where('viewed_at', '>=', now()->subHour())
+            ->exists();
+
+        // Only count as a new view if it's not a recent duplicate
+        if (!$recentView) {
+            // Record the view in the new snippet_views table
+            SnippetView::create([
+                'snippet_id' => $snippet->id,
+                'viewed_at' => now(),
+                'viewer_ip' => $visitorIp,
+            ]);
+
+            // Also increment the views_count for backwards compatibility
+            $snippet->increment('views_count');
+        }
+
         // Add is_favorite check for authenticated users
         if (auth()->check()) {
             $snippet->is_favorite = $snippet->favoritedBy()->where('user_id', auth()->id())->exists();
@@ -119,7 +142,7 @@ class SnippetController extends Controller
         $this->authorize('delete', $snippet);
 
         $snippet->delete();
-        
+
     }
 
     public function toggleFavorite(Snippet $snippet)

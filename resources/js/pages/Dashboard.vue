@@ -12,34 +12,33 @@ import { computed } from 'vue';
 const page = usePage();
 
 interface DashboardData {
-  totalSnippets: number;
-  totalViews: number;
-  totalFavorites: number;
-  monthlyViews: Record<string, number>;
-  popularSnippets: Array<{
-    id: number;
-    title: string;
-    views: number;
-    language: string;
-  }>;
+    totalSnippets: number;
+    totalViews: number;
+    totalFavorites: number;
+    monthlyViews: Record<string, number>;
+    popularSnippets: Array<{
+        id: number;
+        title: string;
+        views: number;
+        language: string;
+    }>;
 }
 
 // Define default empty data that matches the interface
 const emptyDashboardData: DashboardData = {
-  totalSnippets: 0,
-  totalViews: 0,
-  totalFavorites: 0,
-  monthlyViews: {},
-  popularSnippets: [],
+    totalSnippets: 0,
+    totalViews: 0,
+    totalFavorites: 0,
+    monthlyViews: {},
+    popularSnippets: [],
 };
 
 console.log('Dashboard data:', page.props.dashboardData);
 
 // Access the dashboardData directly from page props with proper typing
 const dashboardData = computed<DashboardData>(() => {
-  return (page.props.dashboardData as DashboardData || emptyDashboardData);
+    return (page.props.dashboardData as DashboardData) || emptyDashboardData;
 });
-
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -100,8 +99,8 @@ const popularSnippets = computed(() => dashboardData.value.popularSnippets || []
                 />
             </div>
 
-            <div class="flex-1 gap-5 grid grid-cols-1 md:grid-cols-3">
-                <div class="relative col-span-1 md:col-span-2 dark:border-sidebar-border rounded-lg overflow-auto">
+            <div class="flex-1 gap-5 grid grid-cols-1 lg:grid-cols-3">
+                <div class="relative col-span-1 lg:col-span-2 dark:border-sidebar-border rounded-lg overflow-auto">
                     <EngagementChart title="Snippet Engagement" :chart-data="chartData" class="h-full" />
                 </div>
                 <div class="relative col-span-1 dark:border-sidebar-border rounded-lg h-full overflow-auto">

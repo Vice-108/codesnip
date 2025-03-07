@@ -43,7 +43,7 @@ const breadcrumbs = [
     <Head title="My Snippets" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="mx-auto p-4 container">
+        <div class="container mx-auto p-4">
             <Card>
                 <CardHeader>
                     <CardTitle>My Snippets</CardTitle>

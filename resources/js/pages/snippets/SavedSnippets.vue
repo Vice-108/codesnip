@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import AppLayout from '@/layouts/AppLayout.vue';
 import SavedSnippetTable from '@/components/snippets/SavedSnippetTable.vue';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { Snippet } from '@/types';
 import TablePagination from '@/components/snippets/TablePagination.vue';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import AppLayout from '@/layouts/AppLayout.vue';
+import type { Snippet } from '@/types';
+import { Head } from '@inertiajs/vue3';
 
 interface Props {
     snippets: {
@@ -43,7 +43,7 @@ const breadcrumbs = [
     <Head title="Saved Snippets" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="mx-auto p-4 container">
+        <div class="container mx-auto p-4">
             <Card>
                 <CardHeader>
                     <CardTitle>Saved Snippets</CardTitle>

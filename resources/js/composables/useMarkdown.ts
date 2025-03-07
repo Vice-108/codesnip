@@ -1,5 +1,5 @@
-import MarkdownIt from 'markdown-it'
-import hljs from 'highlight.js'
+import hljs from 'highlight.js';
+import MarkdownIt from 'markdown-it';
 
 interface HighlightOptions {
     language: string;
@@ -7,18 +7,18 @@ interface HighlightOptions {
 
 const md = new MarkdownIt({
     highlight: function (code: string, lang: string): string {
-        let highlightedCode: string
+        let highlightedCode: string;
         if (lang && hljs.getLanguage(lang)) {
-            highlightedCode = hljs.highlight(code, { language: lang } as HighlightOptions).value
+            highlightedCode = hljs.highlight(code, { language: lang } as HighlightOptions).value;
         } else {
-            const detected = hljs.highlightAuto(code)
-            highlightedCode = detected.value
-            lang = detected.language || 'plaintext'
+            const detected = hljs.highlightAuto(code);
+            highlightedCode = detected.value;
+            lang = detected.language || 'plaintext';
         }
-        return `<pre><code class="hljs ${lang} p-0 m-0">${highlightedCode}</code></pre>`
+        return `<pre><code class="hljs ${lang} p-0 m-0">${highlightedCode}</code></pre>`;
     },
-})
+});
 
 export default function useMarkdown(text: string): string {
-    return md.render(text)
+    return md.render(text);
 }

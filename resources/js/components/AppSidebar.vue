@@ -4,12 +4,10 @@ import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { Folder, LayoutGrid, Code, PlusCircle, User, BookmarkCheck } from 'lucide-vue-next';
-import AppLogo from './AppLogo.vue';
-import { usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
+import { BookmarkCheck, Code, Folder, LayoutGrid, PlusCircle, User } from 'lucide-vue-next';
 import { computed } from 'vue';
-
+import AppLogo from './AppLogo.vue';
 
 const page = usePage();
 const isAuthenticated = computed(() => (page.props.auth as any)?.user);
@@ -20,28 +18,30 @@ const mainNavItems = computed(() => [
         href: '/snippets',
         icon: Code,
     },
-    ...(isAuthenticated.value ? [
-        {
-            title: 'Dashboard',
-            href: '/dashboard',
-            icon: LayoutGrid,
-        },
-        {
-            title: 'Create Snippet',
-            href: '/snippets/create',
-            icon: PlusCircle,
-        },
-        {
-            title: 'My Snippets',
-            href: '/my-snippets',
-            icon: User,
-        },
-        {
-            title: 'Saved Snippets',
-            href: '/saved-snippets',
-            icon: BookmarkCheck,
-        }
-    ] : []),
+    ...(isAuthenticated.value
+        ? [
+              {
+                  title: 'Dashboard',
+                  href: '/dashboard',
+                  icon: LayoutGrid,
+              },
+              {
+                  title: 'Create Snippet',
+                  href: '/snippets/create',
+                  icon: PlusCircle,
+              },
+              {
+                  title: 'My Snippets',
+                  href: '/my-snippets',
+                  icon: User,
+              },
+              {
+                  title: 'Saved Snippets',
+                  href: '/saved-snippets',
+                  icon: BookmarkCheck,
+              },
+          ]
+        : []),
 ]);
 
 const footerNavItems: NavItem[] = [

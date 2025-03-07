@@ -13,22 +13,21 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const { getInitials } = useInitials();
-
 </script>
 
 <template>
-    <Avatar class="rounded-lg w-8 h-8 overflow-hidden">
+    <Avatar class="h-8 w-8 overflow-hidden rounded-lg">
         <AvatarImage v-if="false" :src="user.avatar as string" :alt="user.name" />
         <AvatarFallback class="rounded-lg text-black dark:text-white">
-            {{ props.user !== null ?  getInitials(user.name) : "G" }}
+            {{ props.user !== null ? getInitials(user.name) : 'G' }}
         </AvatarFallback>
     </Avatar>
 
-    <div class="flex-1 grid text-sm text-left leading-tight" v-if="props.user !==null">
-        <span class="font-medium truncate">{{ user.name }}</span>
-        <span v-if="showEmail" class="text-muted-foreground text-xs truncate">{{ user.email }}</span>
+    <div class="grid flex-1 text-left text-sm leading-tight" v-if="props.user !== null">
+        <span class="truncate font-medium">{{ user.name }}</span>
+        <span v-if="showEmail" class="truncate text-xs text-muted-foreground">{{ user.email }}</span>
     </div>
     <div v-else>
-        <span class="font-medium truncate">Guest</span>
+        <span class="truncate font-medium">Guest</span>
     </div>
 </template>

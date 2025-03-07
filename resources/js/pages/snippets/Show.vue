@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import useMarkdown from '@/composables/useMarkdown';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { type BreadcrumbItem, type Snippet } from '@/types';
-import { Head, useForm, Link, usePage } from '@inertiajs/vue3';
-import { Heart, Copy, Share2, Check, Pencil } from 'lucide-vue-next';
-import  useMarkdown  from '@/composables/useMarkdown';
-import { computed, ref } from 'vue';
-import '@catppuccin/highlightjs/css/catppuccin-macchiato.css'
-import { toast } from 'vue-sonner';
 import { capitalize } from '@/lib/utils';
+import { type BreadcrumbItem, type Snippet } from '@/types';
+import '@catppuccin/highlightjs/css/catppuccin-macchiato.css';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import { Check, Copy, Heart, Pencil, Share2 } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
+import { toast } from 'vue-sonner';
 
 const props = defineProps<{
     snippet: Snippet;
@@ -63,31 +63,30 @@ const shareSnippet = () => {
 };
 
 const page = usePage();
-
 </script>
 
 <template>
     <Head :title="snippet.title" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="mx-auto sm:p-4 w-full lg:container">
-            <Card class="sm:mx-0 lg:mx-auto sm:border border-0 rounded-none sm:rounded-lg w-full lg:max-w-4xl">
+        <div class="mx-auto w-full lg:container sm:p-4">
+            <Card class="w-full rounded-none border-0 sm:mx-0 sm:rounded-lg sm:border lg:mx-auto lg:max-w-4xl">
                 <CardHeader>
-                    <div class="flex sm:flex-row flex-col sm:justify-between sm:items-start gap-4">
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div class="space-y-2">
                             <CardTitle class="break-words">{{ snippet.title }}</CardTitle>
                         </div>
-                        <div class="flex justify-between sm:self-auto gap-2">
+                        <div class="flex justify-between gap-2 sm:self-auto">
                             <Button variant="ghost" size="icon" @click="toggleFavorite" :disabled="form.processing">
-                                <Heart :style="{height:'25px', width: '25px' }" :class="{ 'fill-current': snippet.is_favorite }" />
+                                <Heart :style="{ height: '25px', width: '25px' }" :class="{ 'fill-current': snippet.is_favorite }" />
                             </Button>
                             <Link
                                 v-if="snippet.user.id === (page.props as any).auth.user?.id"
-                                :href="route('snippets.edit', { id : snippet.id })"
+                                :href="route('snippets.edit', { id: snippet.id })"
                                 class="inline-flex items-center gap-2"
                             >
                                 <Button variant="outline" size="sm">
-                                    <Pencil class="mr-2 w-4 h-4" />
+                                    <Pencil class="mr-2 h-4 w-4" />
                                     Edit
                                 </Button>
                             </Link>
@@ -95,30 +94,27 @@ const page = usePage();
                     </div>
                 </CardHeader>
 
-                <CardContent class="mx-auto sm:px-6 w-full">
-                    <div class="mx-auto border rounded-lg w-full overflow-hidden markdown-content">
-                        <div class="flex flex-wrap justify-between items-center px-2 sm:px-4 py-2 border-b border-border">
-                            <span class="font-medium text-sm sm:text-base">{{ capitalize(snippet.language || '') }}</span>
+                <CardContent class="mx-auto w-full sm:px-6">
+                    <div class="markdown-content mx-auto w-full overflow-hidden rounded-lg border">
+                        <div class="flex flex-wrap items-center justify-between border-b border-border px-2 py-2 sm:px-4">
+                            <span class="text-sm font-medium sm:text-base">{{ capitalize(snippet.language || '') }}</span>
                             <div class="flex gap-2">
                                 <Button variant="ghost" size="icon" @click="copyCode">
                                     <transition name="fade" mode="out-in">
-                                        <Check v-if="showCopyTick" class="w-4 h-4" />
-                                        <Copy v-else class="w-4 h-4" />
+                                        <Check v-if="showCopyTick" class="h-4 w-4" />
+                                        <Copy v-else class="h-4 w-4" />
                                     </transition>
                                 </Button>
                                 <Button variant="ghost" size="icon" @click="shareSnippet">
                                     <transition name="fade" mode="out-in">
-                                        <Check v-if="showShareTick" class="w-4 h-4" />
-                                        <Share2 v-else class="w-4 h-4" />
+                                        <Check v-if="showShareTick" class="h-4 w-4" />
+                                        <Share2 v-else class="h-4 w-4" />
                                     </transition>
                                 </Button>
                             </div>
                         </div>
                         <div class="code-container">
-                            <div
-                                class="overflow-x-scroll"
-                                v-html="formattedCode"
-                            ></div>
+                            <div class="overflow-x-scroll" v-html="formattedCode"></div>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -126,13 +122,13 @@ const page = usePage();
                     </div>
                 </CardContent>
 
-                <CardFooter class="flex sm:flex-row justify-between items-start sm:items-center gap-4">
+                <CardFooter class="flex items-start justify-between gap-4 sm:flex-row sm:items-center">
                     <div class="space-x-2">
                         <span>Created by</span>
                         <span class="font-semibold">{{ snippet.user.name }}</span>
                     </div>
-                    <div class="text-muted-foreground text-sm">
-                        <span class="p-2 sm:p-3 border rounded-lg">Views: {{ snippet.views_count }}</span>
+                    <div class="text-sm text-muted-foreground">
+                        <span class="rounded-lg border p-2 sm:p-3">Views: {{ snippet.views_count }}</span>
                     </div>
                 </CardFooter>
             </Card>

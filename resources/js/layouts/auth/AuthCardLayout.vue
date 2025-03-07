@@ -10,17 +10,17 @@ defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center gap-6 bg-muted p-6 md:p-10 min-h-svh">
-        <div class="flex flex-col gap-6 w-full max-w-md">
-            <Link :href="route('home')" class="flex items-center self-center gap-2 font-medium">
-                <div class="flex justify-center items-center w-9 h-9">
-                    <AppLogoIcon class="rounded-md size-9 text-black dark:text-white" />
+    <div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+        <div class="flex w-full max-w-md flex-col gap-6">
+            <Link :href="route('home')" class="flex items-center gap-2 self-center font-medium">
+                <div class="flex h-9 w-9 items-center justify-center">
+                    <AppLogoIcon class="size-9 rounded-md text-black dark:text-white" />
                 </div>
             </Link>
 
             <div class="flex flex-col gap-6">
                 <Card class="rounded-xl">
-                    <CardHeader class="px-10 pt-8 pb-0 text-center">
+                    <CardHeader class="px-10 pb-0 pt-8 text-center">
                         <CardTitle class="text-xl">{{ title }}</CardTitle>
                         <CardDescription>
                             {{ description }}

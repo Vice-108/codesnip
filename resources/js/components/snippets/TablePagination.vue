@@ -81,7 +81,7 @@ const paginatedItems = computed(() => {
 
 <template>
     <Pagination v-if="totalItems > 0" :itemsPerPage="itemsPerPage" :total="totalItems" :page="currentPage" :siblingCount="1">
-        <PaginationList class="flex justify-center items-center gap-2">
+        <PaginationList class="flex items-center justify-center gap-2">
             <!-- First & Previous Buttons -->
             <PaginationFirst @click="handlePagination(1)" :disabled="currentPage <= 1" />
             <PaginationPrev @click="handlePagination(currentPage - 1)" :disabled="currentPage <= 1" />
@@ -90,7 +90,7 @@ const paginatedItems = computed(() => {
             <template v-for="(item, index) in paginatedItems" :key="index">
                 <PaginationListItem v-if="item.type === 'page'" :value="item.value as number" as-child>
                     <Button
-                        class="p-0 w-9 h-9"
+                        class="h-9 w-9 p-0"
                         :variant="item.value === currentPage ? 'default' : 'outline'"
                         @click="handlePagination(item.value as number)"
                     >

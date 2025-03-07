@@ -16,8 +16,9 @@ defineProps<{
         <CardHeader>
             <CardTitle>{{ title }}</CardTitle>
         </CardHeader>
-        <CardContent class="flex-1 mt-10">
-            <AreaChart :data="chartData" index="name" :categories="['views']" class="w-full" />
+        <CardContent class="mt-10 flex-1">
+            <AreaChart v-if="chartData.length" :data="chartData" index="name" :categories="['views']" class="w-full" />
+            <div v-else class="flex h-40 items-center justify-center text-gray-500">No data available</div>
         </CardContent>
     </Card>
 </template>

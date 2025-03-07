@@ -12,9 +12,7 @@ defineEmits(['update:modelValue']);
 
 <template>
     <div class="space-y-2">
-        <Label for="title" class="flex items-center gap-1">
-            Title <span class="text-destructive">*</span>
-        </Label>
+        <Label for="title" class="flex items-center gap-1"> Title <span class="text-destructive">*</span> </Label>
         <Input
             id="title"
             :model-value="modelValue"
@@ -23,6 +21,6 @@ defineEmits(['update:modelValue']);
             placeholder="Enter snippet title"
             required
         />
-        <span v-if="error" class="text-destructive text-sm">{{ error }}</span>
+        <span v-if="error" class="text-sm text-destructive">{{ error }}</span>
     </div>
 </template>

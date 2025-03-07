@@ -20,6 +20,6 @@ defineEmits(['update:modelValue']);
             :error="error"
             placeholder="Enter snippet description"
         />
-        <span v-if="error" class="text-destructive text-sm">{{ error }}</span>
+        <span v-if="error" class="text-sm text-destructive">{{ error }}</span>
     </div>
 </template>

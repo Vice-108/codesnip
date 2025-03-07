@@ -15,16 +15,14 @@ defineEmits(['update:modelValue']);
 <template>
     <div class="space-y-2">
         <div class="flex items-center gap-2">
-            <Label for="code" class="flex items-center gap-1">
-                Code <span class="text-destructive">*</span>
-            </Label>
+            <Label for="code" class="flex items-center gap-1"> Code <span class="text-destructive">*</span> </Label>
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Info class="w-4 h-4 text-muted-foreground cursor-help" />
+                        <Info class="h-4 w-4 cursor-help text-muted-foreground" />
                     </TooltipTrigger>
                     <TooltipContent class="w-80">
-                        <ul class="space-y-1 pl-4 list-disc">
+                        <ul class="list-disc space-y-1 pl-4">
                             <li>Use proper language syntax</li>
                             <li>Include clear and descriptive comments</li>
                             <li>Include usage and result in comments</li>
@@ -45,6 +43,6 @@ defineEmits(['update:modelValue']);
             class="font-mono"
             required
         />
-        <span v-if="error" class="text-destructive text-sm">{{ error }}</span>
+        <span v-if="error" class="text-sm text-destructive">{{ error }}</span>
     </div>
 </template>

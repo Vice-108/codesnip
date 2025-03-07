@@ -2,10 +2,10 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { capitalize } from '@/lib/utils';
 import { type BreadcrumbItem, type Snippet } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import { Heart } from 'lucide-vue-next';
-import { capitalize } from '@/lib/utils'
 defineProps<{
     snippets: {
         data: Array<Snippet>;
@@ -26,7 +26,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-4">
-            <div v-if="snippets.data.length > 0" class="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <div v-if="snippets.data.length > 0" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                 <Link
                     v-for="snippet in snippets.data"
                     :key="snippet.id"
@@ -36,19 +36,19 @@ const breadcrumbs: BreadcrumbItem[] = [
                     <Card class="w-full">
                         <CardHeader>
                             <CardTitle>
-                                <div class="flex justify-between items-center leading-8">
+                                <div class="flex items-center justify-between leading-8">
                                     <span class="mr-2 truncate">{{ snippet.title }}</span>
                                     <i :class="`devicon-${snippet.language}-plain`" class="flex-shrink-0 text-3xl"></i>
                                 </div>
                             </CardTitle>
-                            <CardDescription class="h-10 line-clamp-2">{{ snippet.description || 'No description provided' }}</CardDescription>
+                            <CardDescription class="line-clamp-2 h-10">{{ snippet.description || 'No description provided' }}</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div class="flex justify-between items-center text-muted-foreground text-sm">
+                            <div class="flex items-center justify-between text-sm text-muted-foreground">
                                 <Badge>{{ capitalize(snippet.language as string) }}</Badge>
                                 <span class="ml-2 truncate">Creator: {{ snippet.user.name }}</span>
                             </div>
-                            <div class="flex justify-between mt-2 text-muted-foreground text-xs">
+                            <div class="mt-2 flex justify-between text-xs text-muted-foreground">
                                 <span class="mr-3">Views: {{ snippet.views_count }}</span>
                                 <span class="flex items-center gap-2">
                                     <Heart :size="15" :class="{ 'fill-current': snippet.is_favorite }" />

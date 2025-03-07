@@ -33,8 +33,6 @@ const emptyDashboardData: DashboardData = {
     popularSnippets: [],
 };
 
-console.log('Dashboard data:', page.props.dashboardData);
-
 // Access the dashboardData directly from page props with proper typing
 const dashboardData = computed<DashboardData>(() => {
     return (page.props.dashboardData as DashboardData) || emptyDashboardData;
@@ -87,8 +85,8 @@ const popularSnippets = computed(() => dashboardData.value.popularSnippets || []
     <Head title="Dashboard" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-col flex-1 gap-4 p-4 rounded-xl h-full">
-            <div class="gap-4 grid md:grid-cols-3 auto-rows-min">
+        <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <StatCard
                     v-for="stat in stats"
                     :key="stat.title"
@@ -99,11 +97,11 @@ const popularSnippets = computed(() => dashboardData.value.popularSnippets || []
                 />
             </div>
 
-            <div class="flex-1 gap-5 grid grid-cols-1 lg:grid-cols-3">
-                <div class="relative col-span-1 lg:col-span-2 dark:border-sidebar-border rounded-lg overflow-auto">
+            <div class="grid flex-1 grid-cols-1 gap-5 lg:grid-cols-3">
+                <div class="relative col-span-1 overflow-auto rounded-lg dark:border-sidebar-border lg:col-span-2">
                     <EngagementChart title="Snippet Engagement" :chart-data="chartData" class="h-full" />
                 </div>
-                <div class="relative col-span-1 dark:border-sidebar-border rounded-lg h-full overflow-auto">
+                <div class="relative col-span-1 h-full overflow-auto rounded-lg dark:border-sidebar-border">
                     <PopularSnippets title="Your Top 10 Snippets" :snippets="popularSnippets" class="h-full" />
                 </div>
             </div>

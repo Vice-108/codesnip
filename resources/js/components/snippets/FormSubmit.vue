@@ -9,9 +9,6 @@ defineProps<{
 
 <template>
     <Button type="submit" :disabled="isProcessing" class="w-full">
-        {{ isProcessing
-            ? (mode === 'create' ? 'Creating...' : 'Updating...')
-            : (mode === 'create' ? 'Create Snippet' : 'Update Snippet')
-        }}
+        {{ isProcessing ? (mode === 'create' ? 'Creating...' : 'Updating...') : mode === 'create' ? 'Create Snippet' : 'Update Snippet' }}
     </Button>
 </template>

@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { Folder, LayoutGrid, Code, PlusCircle, User } from 'lucide-vue-next';
+import { Folder, LayoutGrid, Code, PlusCircle, User, BookmarkCheck } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
@@ -36,6 +36,11 @@ const mainNavItems = computed(() => [
             href: '/my-snippets',
             icon: User,
         },
+        {
+            title: 'Saved Snippets',
+            href: '/saved-snippets',
+            icon: BookmarkCheck,
+        }
     ] : []),
 ]);
 

@@ -160,7 +160,7 @@ class SnippetController extends Controller
     {
         $snippets = auth()->user()->snippets()
         ->orderBy('id')
-        ->paginate(15);
+        ->paginate(10);
 
         $snippets->transform(function ($snippet) {
             $snippet->is_favorite = $snippet->favoritedBy()->where('user_id', auth()->id())->exists();
@@ -169,6 +169,18 @@ class SnippetController extends Controller
 
         return Inertia::render('snippets/MySnippets', [
             'snippets' => $snippets
+        ]);
+    }
+
+    public function savedSnippets()
+    {
+        $savedSnippets = auth()->user()->favoriteSnippets()
+            ->with('user')
+            ->latest()
+            ->paginate(10);
+
+        return Inertia::render('snippets/SavedSnippets', [
+            'snippets' => $savedSnippets
         ]);
     }
 }

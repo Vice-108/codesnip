@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import SnippetTable from '@/components/snippets/SnippetTable.vue';
-import TablePagination from '@/components/snippets/TablePagination.vue';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import AppLayout from '@/layouts/AppLayout.vue';
-import type { Snippet } from '@/types';
 import { Head } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/AppLayout.vue';
+import SavedSnippetTable from '@/components/snippets/SavedSnippetTable.vue';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { Snippet } from '@/types';
+import TablePagination from '@/components/snippets/TablePagination.vue';
 
 interface Props {
     snippets: {
@@ -33,23 +33,23 @@ defineProps<Props>();
 
 const breadcrumbs = [
     {
-        title: 'My Snippets',
+        title: 'Saved Snippets',
         href: '#',
     },
 ];
 </script>
 
 <template>
-    <Head title="My Snippets" />
+    <Head title="Saved Snippets" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="mx-auto p-4 container">
             <Card>
                 <CardHeader>
-                    <CardTitle>My Snippets</CardTitle>
+                    <CardTitle>Saved Snippets</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <SnippetTable :snippets="snippets.data" />
+                    <SavedSnippetTable :snippets="snippets.data" />
                     <TablePagination :pagination="snippets" />
                 </CardContent>
             </Card>

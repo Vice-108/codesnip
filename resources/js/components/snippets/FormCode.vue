@@ -19,10 +19,10 @@ defineEmits(['update:modelValue']);
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Info class="h-4 w-4 cursor-help text-muted-foreground" />
+                        <Info class="w-4 h-4 text-muted-foreground cursor-help" />
                     </TooltipTrigger>
                     <TooltipContent class="w-80">
-                        <ul class="list-disc space-y-1 pl-4">
+                        <ul class="space-y-1 pl-4 list-disc">
                             <li>Use proper language syntax</li>
                             <li>Include clear and descriptive comments</li>
                             <li>Include usage and result in comments</li>
@@ -38,11 +38,11 @@ defineEmits(['update:modelValue']);
             :model-value="modelValue"
             @update:model-value="$emit('update:modelValue', $event)"
             :error="error"
-            rows="10"
+            rows="5"
             placeholder="Paste your code here"
             class="font-mono"
             required
         />
-        <span v-if="error" class="text-sm text-destructive">{{ error }}</span>
+        <span v-if="error" class="text-destructive text-sm">{{ error }}</span>
     </div>
 </template>

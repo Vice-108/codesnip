@@ -27,8 +27,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="container mx-auto sm:p-4">
-            <Card class="mx-auto max-w-3xl" style="height: 90svh">
+        <div class="hidden sm:block mx-auto sm:p-4 container">
+            <Card class="mx-auto max-w-3xl">
                 <CardHeader>
                     <CardTitle>Edit Snippet</CardTitle>
                 </CardHeader>
@@ -36,6 +36,10 @@ const breadcrumbs: BreadcrumbItem[] = [
                     <SnippetForm :snippet="snippet" mode="edit" />
                 </CardContent>
             </Card>
+        </div>
+
+        <div class="sm:hidden p-4">
+            <SnippetForm :snippet="snippet" mode="edit" />
         </div>
     </AppLayout>
 </template>

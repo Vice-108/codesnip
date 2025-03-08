@@ -45,15 +45,17 @@ const submit = () => {
 </script>
 
 <template>
-    <form @submit.prevent="submit" class="space-y-6">
-        <div class="grid grid-cols-2 gap-4">
-            <FormTitle v-model="form.title" :error="form.errors.title" />
-            <FormLanguage v-model="selectedLanguage" :initial-language="snippet?.language" :error="form.errors.language" />
-        </div>
+    <div>
+        <form @submit.prevent="submit" class="space-y-6">
+            <div class="gap-4 grid grid-cols-2">
+                <FormTitle v-model="form.title" :error="form.errors.title" />
+                <FormLanguage v-model="selectedLanguage" :initial-language="snippet?.language" :error="form.errors.language" />
+            </div>
 
-        <FormDescription v-model="form.description" :error="form.errors.description" />
-        <FormCode v-model="form.code" :error="form.errors.code" />
-        <FormVisibility v-model="form.is_public" />
-        <FormSubmit :is-processing="form.processing" :mode="mode" />
-    </form>
+            <FormDescription v-model="form.description" :error="form.errors.description" />
+            <FormCode v-model="form.code" :error="form.errors.code" />
+            <FormVisibility v-model="form.is_public" />
+            <FormSubmit :is-processing="form.processing" :mode="mode" />
+        </form>
+    </div>
 </template>

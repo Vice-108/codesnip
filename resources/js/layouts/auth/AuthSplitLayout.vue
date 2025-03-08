@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
+import AppLogo from '@/components/AppLogo.vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
 const page = usePage();
@@ -18,29 +19,28 @@ defineProps<{
 </script>
 
 <template>
-    <div class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-            <div class="pattern absolute inset-0" />
-            <Link :href="route('home')" class="relative z-20 flex items-center text-lg font-medium">
-                <AppLogoIcon class="mr-2 size-9 rounded-md text-black dark:text-white" />
-                {{ name }}
+    <div class="relative flex-col justify-center items-center grid lg:grid-cols-2 px-8 sm:px-0 lg:px-0 lg:max-w-none h-dvh">
+        <div class="hidden relative lg:flex flex-col bg-muted p-10 dark:border-r h-full text-white">
+            <div class="absolute inset-0 pattern" />
+            <Link :href="route('home')" class="z-20 relative flex items-center font-medium text-lg">
+                <AppLogo class="w-8 h-8" />
             </Link>
-            <div v-if="quote" class="relative z-20 mt-auto">
+            <div v-if="quote" class="z-20 relative mt-auto">
                 <blockquote class="space-y-2">
                     <p class="text-lg">&ldquo;{{ quote.message }}&rdquo;</p>
-                    <footer class="text-sm text-neutral-300">{{ quote.author }}</footer>
+                    <footer class="text-neutral-300 text-sm">{{ quote.author }}</footer>
                 </blockquote>
             </div>
         </div>
         <div class="lg:p-8">
-            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div class="flex flex-col justify-center space-y-6 mx-auto w-full sm:w-[350px]">
                 <div class="flex flex-col space-y-2 text-center">
-                    <div class="mx-auto flex items-center text-lg font-bold">
-                        <AppLogoIcon class="mr-2 size-9 rounded-md text-black dark:text-white" />
+                    <div class="flex items-center mx-auto font-bold text-lg">
+                        <AppLogoIcon class="mr-2 rounded-md size-9 text-black dark:text-white" />
                         {{ name }}
                     </div>
-                    <h1 class="text-xl font-medium tracking-tight" v-if="title">{{ title }}</h1>
-                    <p class="text-sm text-muted-foreground" v-if="description">{{ description }}</p>
+                    <h1 class="font-medium text-xl tracking-tight" v-if="title">{{ title }}</h1>
+                    <p class="text-muted-foreground text-sm" v-if="description">{{ description }}</p>
                 </div>
                 <slot />
             </div>

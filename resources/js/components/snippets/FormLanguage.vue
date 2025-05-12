@@ -16,10 +16,12 @@ import { languages, type Language } from '@/data/languages';
 import { cn } from '@/lib/utils';
 import { Check, ChevronsUpDown, Search } from 'lucide-vue-next';
 import { onMounted } from 'vue';
+
 const props = defineProps<{
     modelValue: Language | null;
     initialLanguage?: string;
     error?: string;
+    disabled?: boolean; // <-- Added
 }>();
 
 const emit = defineEmits(['update:modelValue']);
@@ -37,20 +39,19 @@ onMounted(() => {
 <template>
     <div class="space-y-2">
         <Label for="language" class="flex items-center gap-1"> Language <span class="text-destructive">*</span> </Label>
-        <Combobox :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" by="label">
+        <Combobox :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" by="label" :disabled="disabled">
             <ComboboxAnchor as-child>
                 <ComboboxTrigger as-child>
-                    <Button variant="outline" class="h-10 w-full justify-between">
+                    <Button variant="outline" class="justify-between w-full h-10" :disabled="disabled">
                         {{ modelValue?.label ?? 'Select language' }}
-                        <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        <ChevronsUpDown class="opacity-50 ml-2 w-4 h-4 shrink-0" />
                     </Button>
                 </ComboboxTrigger>
             </ComboboxAnchor>
-
-            <ComboboxList class="w-full">
-                <div class="relative w-full items-center">
-                    <ComboboxInput class="h-10 w-full rounded-none border-0 border-b pl-9 focus-visible:ring-0" placeholder="Search language..." />
-                    <span class="absolute inset-y-0 start-0 flex items-center justify-center px-3">
+            <ComboboxList class="w-full min-w-[var(--reka-combobox-trigger-width)] max-w-[var(--reka-combobox-trigger-width)]">
+                <div class="relative items-center w-full">
+                    <ComboboxInput class="pl-9 border-0 border-b rounded-none focus-visible:ring-0 w-full h-10" placeholder="Search language..." />
+                    <span class="absolute inset-y-0 flex justify-center items-center px-3 start-0">
                         <Search class="size-4 text-muted-foreground" />
                     </span>
                 </div>
@@ -67,6 +68,6 @@ onMounted(() => {
                 </ComboboxGroup>
             </ComboboxList>
         </Combobox>
-        <span v-if="error" class="text-sm text-destructive">{{ error }}</span>
+        <span v-if="error" class="text-destructive text-sm">{{ error }}</span>
     </div>
 </template>

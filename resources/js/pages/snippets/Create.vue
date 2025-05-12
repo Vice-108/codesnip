@@ -20,13 +20,13 @@ const breadcrumbs: BreadcrumbItem[] = [
                     <CardTitle>Create New Snippet</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <SnippetForm mode="edit" />
+                    <SnippetForm mode="create" />
                 </CardContent>
             </Card>
         </div>
 
         <div class="sm:hidden p-4">
-            <SnippetForm mode="edit" />
+            <SnippetForm mode="create" />
         </div>
     </AppLayout>
 </template>

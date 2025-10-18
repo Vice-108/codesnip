@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// filepath: /e:/code/codesnip/resources/js/components/snippets/AiConvert.vue
 import LanguageSelector from '@/components/snippets/LanguageSelector.vue';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -85,10 +84,10 @@ function retry() {
                 <LanguageSelector :error="error" :disabled="loading" @update:model-value="handleLanguageChange" />
             </div>
 
-            <div v-if="loading" class="p-4 text-muted-foreground text-center">Analyzing...</div>
+            <div v-if="loading" class="p-4 text-center text-muted-foreground">Analyzing...</div>
             <div v-else-if="error" class="p-4 text-destructive">Error: {{ error.message }}</div>
             <ScrollArea v-else-if="renderedMarkdown" class="py-4">
-                <div class="space-y-2 p-2 h-[75dvh] text-[0.75rem] markdown-content" v-html="renderedMarkdown"></div>
+                <div class="markdown-content h-[75dvh] space-y-2 p-2 text-[0.70rem]" v-html="renderedMarkdown"></div>
             </ScrollArea>
             <div v-else-if="hasFetched" class="p-4 text-muted-foreground">No conversion generated yet.</div>
 
